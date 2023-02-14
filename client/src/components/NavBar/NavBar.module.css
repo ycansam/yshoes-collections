@@ -1,0 +1,29 @@
+.mainContainer {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15rem;
+}
+.mainContainer>div{
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 5rem;
+    margin-right: 2rem;
+}
+
+.itemNav {
+    margin-right: 2rem;
+}
+
+.itemNav:hover {
+    text-decoration: underline 1px black;
+}
+
+.divIcons>i{
+    font-size: 25px;
+    margin-right: 0.25rem;
+}
