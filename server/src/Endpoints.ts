@@ -1,11 +1,12 @@
 export default class Endpoints {
     static readonly version = "/v1";
-    static readonly DEFAULT_PATH = this.version + "/";
+    static readonly DEFAULT_PATH = this.version + "/yshoes";
     static readonly USERS = {
-        GET: "/users",
-        GET_ONE: "/users/:id",
-        CREATE: "/users",
-        UPDATE: "/users/:id",
-        DELETE: "/users/:id",
+        DEFAULT_PATH: this.DEFAULT_PATH + "/users",
+        GET: "/",
+        GET_ONE: "/:id",
+        CREATE: "/",
+        UPDATE: "/:id",
+        DELETE: "/:id",
     };
 }

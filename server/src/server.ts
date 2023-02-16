@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Endpoints from './Endpoints';
-
+import UsersRouter from './routes/users.routes';
 class Server {
     private app: Application;
     private readonly port: number = 3001;
@@ -28,10 +28,8 @@ class Server {
     }
 
     private setRoutes(): void {
-        console.log(Endpoints);
-        this.app.get(Endpoints.DEFAULT_PATH, (req: Request, res: Response) => {
-            res.send('Hello, world!');
-        });
+        this.app.use(Endpoints.USERS.DEFAULT_PATH, UsersRouter);
+
     }
 
     private startServer(): void {
