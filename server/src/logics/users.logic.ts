@@ -1,5 +1,4 @@
 import usersModel from "../models/users.model";
-
 class UsersLogics {
 
     public getOne = async () => {

@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import usersLogic from "../logics/users.logic";
-import Controller from "./controller";
+import Controller from "./controller.interface";
 
 class UsersController implements Controller {
 
