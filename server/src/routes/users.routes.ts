@@ -1,17 +1,14 @@
 import { Application } from "express";
 import Endpoints from "../Endpoints";
 import AppRouter from "../router";
-
+import usersController from "../controllers/users.controller";
 class UsersRouter extends AppRouter {
     constructor() {
         super();
-        this.getUser();
+        this.getOne();
     }
 
-    private getUser = () => this.router.get(Endpoints.USERS.GET, async (req, res) => {
-        console.log("a");
-        return res.status(200).json({message: "HOLA"});
-    })
+    private getOne = () => this.router.get(Endpoints.USERS.GET, usersController.getOne)
 
 }
 

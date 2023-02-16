@@ -6,7 +6,6 @@ require('dotenv').config();
 class Server {
     private app: Application;
     private readonly port: number = 3001;
-    private readonly mongoURI: string = process.env.MONGO_URI;
 
     constructor() {
         this.app = express();

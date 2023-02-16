@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const idValidator = require('mongoose-id-validator');
 const { Schema } = mongoose;
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 
 const UserModel = new Schema({
     username: { type: String, required: true, unique: true },
@@ -35,4 +35,4 @@ UserModel.pre('save', function (next) {
 
 UserModel.plugin(idValidator);
 // exportando modelo
-module.exports = mongoose.model('User', UserModel);
+export default mongoose.model('User', UserModel);
