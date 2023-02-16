@@ -1,10 +1,11 @@
 import usersModel from "../models/users.model";
-class UsersLogics {
+import Logic from "./logic.logic";
+class UsersLogics extends Logic {
 
     public getOne = async () => {
 
         const query = {};
-        const users = await usersModel.findOne(query);
+        const users = await this.model.findOne(query);
 
         return new Promise((resolve, reject) => {
             users ? resolve(users) : reject('No se ha encontrado el usuario')
@@ -12,5 +13,5 @@ class UsersLogics {
     }
 }
 
-const usersLogic: UsersLogics = new UsersLogics();
+const usersLogic: UsersLogics = new UsersLogics(usersModel);
 export default usersLogic;

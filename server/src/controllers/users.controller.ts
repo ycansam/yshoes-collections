@@ -1,8 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import usersLogic from "../logics/users.logic";
-import Controller from "./controller.interface";
 
-class UsersController implements Controller {
+class UsersController {
 
     public getOne = async (req: Request, res: Response, next: NextFunction) => {
 
