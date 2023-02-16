@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from './page.module.css'
-import NavBar from '@/components/NavBar/Navbar'
+import LandingPage from '@/components/LandingPage/LadingPage'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <main >
-        <NavBar/>
+      <LandingPage />
     </main>
   )
 }

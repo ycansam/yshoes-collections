@@ -1,0 +1,23 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore built TypeScript files
+build/
+
+# Ignore log files
+*.log
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore TypeScript configuration file
+tsconfig.json
+
+# Ignore package-lock.json file
+package-lock.json
+
+# Ignore .env file (for storing environment variables)
+.env

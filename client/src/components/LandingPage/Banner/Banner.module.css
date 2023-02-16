@@ -1,0 +1,44 @@
+.mainContainer {
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background: url("https://cdn.shopify.com/s/files/1/0653/9332/8396/files/nike-air-jordan-1-x-off-white-nrg_white-white_aq0818-100-replica-photo.jpg?v=1670848740&width=1500");
+}
+
+.mainContainer::after {
+    background-color: rgba(0, 0, 0, 0.386);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+}
+
+.contents {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-div);
+    border-radius: var(--border-radius);
+    z-index: 1;
+    color: white;
+}
+.contents>h1{
+    font-weight: 500;
+    font-size: 50px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.contents>p{
+    font-weight:100;
+    font-size: 20px;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.contents>* {}
