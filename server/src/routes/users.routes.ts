@@ -8,7 +8,7 @@ class UsersRouter extends AppRouter {
         this.getUser();
     }
 
-    public getUser = () => this.router.get(Endpoints.USERS.GET, async (req, res) => {
+    private getUser = () => this.router.get(Endpoints.USERS.GET, async (req, res) => {
         console.log("a");
         return res.status(200).json({message: "HOLA"});
     })

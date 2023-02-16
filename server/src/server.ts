@@ -1,11 +1,12 @@
 import express, { Application, Request, Response } from 'express';
-import mongoose from 'mongoose';
 import Endpoints from './Endpoints';
 import UsersRouter from './routes/users.routes';
+import Database from './database'
+require('dotenv').config();
 class Server {
     private app: Application;
     private readonly port: number = 3001;
-    private readonly mongoURI: string = 'mongodb+srv://root:root@yshoescollections.wrbrjwg.mongodb.net/?retryWrites=true&w=majority';
+    private readonly mongoURI: string = process.env.MONGO_URI;
 
     constructor() {
         this.app = express();
@@ -20,11 +21,7 @@ class Server {
     }
 
     private connectDatabase(): void {
-        mongoose
-            .connect(this.mongoURI, {
-            })
-            .then(() => console.log('MongoDB connected'))
-            .catch((err) => console.log(err));
+        Database.connect();
     }
 
     private setRoutes(): void {
