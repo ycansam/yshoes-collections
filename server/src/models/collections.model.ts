@@ -1,6 +1,6 @@
 
-const mongoose = require('mongoose');
-const idValidator = require('mongoose-id-validator');
+import mongoose from 'mongoose';
+import idValidator from 'mongoose-id-validator';
 const { Schema } = mongoose;
 
 const CollectionModel = new Schema({

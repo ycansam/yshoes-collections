@@ -1,6 +1,6 @@
 
-const mongoose = require('mongoose');
-const idValidator = require('mongoose-id-validator');
+import mongoose from 'mongoose';
+import idValidator from 'mongoose-id-validator';
 const { Schema } = mongoose;
 
 // Requiere de 1 minimo de length 1;
@@ -10,7 +10,7 @@ const minimumColorsLength = (colors: Array<any>) => {
 
 // Requiere que sea entero y que no sean negativas
 const validateUnitsIntegerAndPositive = (units: number) => {
-    return Number.isInteger(units) && units >= 0;
+    return Number.isInteger(units);
 }
 
 // Talla Schema para cada uno de los colores

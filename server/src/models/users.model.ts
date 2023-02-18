@@ -10,7 +10,13 @@ const UserModel = new Schema({
     surnames: { type: String },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    jwt_access: { type: String }
+    jwt_access: { type: String },
+    cart: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Product"
+        }]
+    }
 });
 
 
