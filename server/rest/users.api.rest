@@ -7,22 +7,22 @@ Content-Type: application/json
 
 {
     "name": "holaa",
-    "username": "hola",
+    "username": "holaaaa",
     "password": "hola",
-    "email": "holaa@hola.com"
+    "email": "holaa@holaasddaa.com"
 }
 
 
 ###
-PUT http://localhost:3001/v1/yshoes/users/63f124eaf20598964c1201c6
+PUT http://localhost:3001/v1/yshoes/users/63f1280f1376cc5bcd198644
 Content-Type: application/json
 
 {
     "name": "",
-    "username": "a",
+    "username": "asdas",
     "password": "aasasd",
-    "email": "holaa@ola.hola"
+    "email": "holaa@ola"
 }
 
 ###
-DELETE  http://localhost:3001/v1/yshoes/users/63f124eaf20598964c1201c6
+DELETE  http://localhost:3001/v1/yshoes/users/63f1280f1376cc5bcd198644

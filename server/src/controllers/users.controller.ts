@@ -17,8 +17,8 @@ class UsersController {
 
         const result = usersLogic.getById(id);
 
-        result.then(users => {
-            return res.status(200).json(users);
+        result.then(user => {
+            return res.status(200).json(user);
         }).catch(err => {
             console.log(err.message);
             next(err);
