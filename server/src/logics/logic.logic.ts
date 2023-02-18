@@ -9,7 +9,7 @@ import { Model } from "mongoose";
  */
 export default class Logic {
 
-    public model: Model<any>;
+    protected model: Model<any>;
     private ClassRef: any;
     private nameRef: string;
 
@@ -25,7 +25,7 @@ export default class Logic {
      * @param id id del objeto a buscar
      * @returns devuelve un objeto de la clase referencia
      */
-    public getByIdAny = (id: string) => {
+    protected getByIdAny = (id: string) => {
         return new Promise(async (resolve, reject): Promise<any> => {
             try {
                 const doc = await this.model.findById(id);
@@ -49,7 +49,7 @@ export default class Logic {
      * @returns devuelve true
      */
 
-    public createAny = (body: any): Promise<boolean> => {
+    protected createAny = (body: any): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
                 await this.model.create(body);
@@ -67,7 +67,7 @@ export default class Logic {
      * @param body todo el contenido del objeto
      * @returns devuelve true si lo añade
      */
-    public updateAny = async (id: string, body: any): Promise<boolean> => {
+    protected updateAny = async (id: string, body: any): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
                 // Lo busca y lo actualiza. Si no lo encuentra tira un nuevo error
@@ -85,7 +85,7 @@ export default class Logic {
      * @param id 
      * @returns devuelve true si lo ha eliminado
      */
-    public deleteAnyById = async (id: String) => {
+    protected deleteAnyById = async (id: String) => {
         return new Promise(async (resolve, reject) => {
             try {
                 // Lo busca y lo elimina. Si no lo encuentra tira un nuevo error

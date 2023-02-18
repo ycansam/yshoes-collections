@@ -14,7 +14,7 @@ export default class Controller {
         this.MESSAGES = messages;
     }
 
-    public getByIdAny = async (req: Request, res: Response, next: NextFunction) => {
+    protected getByIdAny = async (req: Request, res: Response, next: NextFunction) => {
 
         const { id } = req.params;
 
@@ -28,45 +28,57 @@ export default class Controller {
         })
     }
 
-    public createAny = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    protected createAny = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 
-        const newItem = new this.classRef(req.body);
-        const itemCreated = this.logic.create(newItem);
+        try {
+            const newItem = new this.classRef(req.body);
+            const itemCreated = this.logic.create(newItem);
 
-        itemCreated.then((item: any) => {
-            return res.status(200).json({ content: item, message: this.MESSAGES.CREATED });
-        }).catch((err: Error) => {
-            console.log(err.message);
+            itemCreated.then((item: any) => {
+                return res.status(200).json({ content: item, message: this.MESSAGES.CREATED });
+            }).catch((err: Error) => {
+                console.log(err.message);
+                next(err);
+            })
+        } catch (err) {
             next(err);
-        })
+        }
+    }
+
+    protected updateAny = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const newItem = new this.classRef(req.body);
+            const { id } = req.params;
+
+            const itemUpdated = this.logic.update(id, newItem);
+
+            itemUpdated.then((item: any) => {
+                return res.status(200).json({ content: item, message: this.MESSAGES.UPDATED });
+            }).catch((err: Error) => {
+                console.log(err.message);
+                next(err);
+            })
+        } catch (err) {
+            next(err);
+        }
 
     }
 
-    public updateAny = async (req: Request, res: Response, next: NextFunction) => {
-        const newItem = new this.classRef(req.body);
-        const { id } = req.params;
+    protected deleteAny = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { id } = req.params;
+            const itemDeleted = this.logic.delete(id);
 
-        const itemUpdated = this.logic.update(id, newItem);
-
-        itemUpdated.then((item: any) => {
-            return res.status(200).json({ content: item, message: this.MESSAGES.UPDATED });
-        }).catch((err: Error) => {
-            console.log(err.message);
+            itemDeleted.then((item: any) => {
+                return res.status(200).json({ content: item, message: this.MESSAGES.DELETED });
+            }).catch((err: Error) => {
+                console.log(err.message);
+                next(err);
+            })
+        } catch (err) {
             next(err);
-        })
-    }
+        }
 
-    public deleteAny = async (req: Request, res: Response, next: NextFunction) => {
-
-        const { id } = req.params;
-        const itemDeleted = this.logic.delete(id);
-
-        itemDeleted.then((item: any) => {
-            return res.status(200).json({ content: item, message: this.MESSAGES.DELETED });
-        }).catch((err: Error) => {
-            console.log(err.message);
-            next(err);
-        })
     }
 
 }

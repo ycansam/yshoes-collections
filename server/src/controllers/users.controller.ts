@@ -1,4 +1,3 @@
-import { Response, Request, NextFunction } from "express";
 import usersLogic from "../logics/users.logic";
 import CUser from "../classes/users.class";
 import IMessage from "../interfaces/message.interface";
