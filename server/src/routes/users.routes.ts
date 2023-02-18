@@ -1,17 +1,17 @@
-import { Application } from "express";
 import Endpoints from "../Endpoints";
 import AppRouter from "../router";
 import usersController from "../controllers/users.controller";
+
 class UsersRouter extends AppRouter {
     constructor() {
         super();
-        this.get();
+        this.getById();
         this.create();
         this.update();
         this.delate();
     }
 
-    private get = () => this.router.get(Endpoints.USERS.GET, usersController.get)
+    private getById = () => this.router.get(Endpoints.USERS.GET_BY_ID, usersController.getById)
 
     private create = () => this.router.post(Endpoints.USERS.CREATE, usersController.create);
 

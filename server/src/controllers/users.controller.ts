@@ -1,11 +1,13 @@
 import { Response, Request, NextFunction } from "express";
 import usersLogic from "../logics/users.logic";
-
+import CUser from "../classes/users.class";
 class UsersController {
 
-    public get = async (req: Request, res: Response, next: NextFunction) => {
+    public getById = async (req: Request, res: Response, next: NextFunction) => {
 
-        const result = usersLogic.getOne();
+        const { id } = req.params;
+
+        const result = usersLogic.getById(id);
 
         result.then(users => {
             return res.status(200).json(users);
@@ -17,10 +19,22 @@ class UsersController {
 
     public create = async (req: Request, res: Response, next: NextFunction) => {
 
+        const user = new CUser(req.body);
+        const userCreated = usersLogic.create(user);
+
+        userCreated.then(user => {
+            return res.status(200).json({ content: user, message: "user created" });
+        }).catch(err => {
+            console.log(err.message);
+            next(err);
+        })
+
     }
+
     public update = async (req: Request, res: Response, next: NextFunction) => {
 
     }
+
     public delete = async (req: Request, res: Response, next: NextFunction) => {
 
     }

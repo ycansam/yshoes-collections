@@ -1,15 +1,36 @@
-import usersModel from "../models/users.model";
 import Logic from "./logic.logic";
+import CUser from "../classes/users.class";
+const usersModel = require('../models/users.model')
 class UsersLogics extends Logic {
 
-    public getOne = async () => {
+    public getById = async (id: String) => {
 
-        const query = {};
-        const users = await this.model.findOne(query);
+        const user = await this.model.findById(id);
 
         return new Promise((resolve, reject) => {
-            users ? resolve(users) : reject('No se ha encontrado el usuario')
+            user ? resolve(user) : reject('No se ha encontrado el usuario')
         })
+    }
+
+    public create = (user: CUser) => {
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                const newuser = await this.model.create(user);
+                resolve(true);
+            } catch (err) {
+                reject(err)
+            }
+        })
+
+    }
+
+    public update = async (user: CUser) => {
+
+    }
+
+    public delete = async (id: String) => {
+
     }
 }
 

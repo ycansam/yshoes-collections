@@ -4,8 +4,7 @@ export default class Endpoints {
 
     static readonly USERS = {
         DEFAULT_PATH: this.DEFAULT_PATH + "/users",
-        GET: "/",
-        GET_ONE: "/:id",
+        GET_BY_ID: "/:id",
         CREATE: "/",
         UPDATE: "/:id",
         DELETE: "/:id",

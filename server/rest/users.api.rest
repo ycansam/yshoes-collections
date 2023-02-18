@@ -1,0 +1,14 @@
+###
+GET http://localhost:3001/v1/yshoes/users/123
+
+###
+POST http://localhost:3001/v1/yshoes/users/
+Content-Type: application/json
+
+{
+    "name": "holaa",
+    "username": "hola",
+    "password": "hola",
+    "email": "holaa@hola.com"
+}
+
