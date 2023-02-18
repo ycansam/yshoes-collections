@@ -12,11 +12,10 @@ class UsersLogics extends Logic {
         })
     }
 
-    public create = (user: CUser) => {
-
+    public create = (user: CUser): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
-                const newuser = await this.model.create(user);
+                await this.model.create(user);
                 resolve(true);
             } catch (err) {
                 reject(err)
@@ -25,7 +24,15 @@ class UsersLogics extends Logic {
 
     }
 
-    public update = async (user: CUser) => {
+    public update = async (id: string, user: CUser): Promise<boolean> => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.model.findByIdAndUpdate(id, user);
+                resolve(true);
+            } catch (err) {
+                reject(err)
+            }
+        })
 
     }
 

@@ -17,7 +17,7 @@ class UsersController {
         })
     }
 
-    public create = async (req: Request, res: Response, next: NextFunction) => {
+    public create = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 
         const user = new CUser(req.body);
         const userCreated = usersLogic.create(user);
@@ -26,13 +26,23 @@ class UsersController {
             return res.status(200).json({ content: user, message: "user created" });
         }).catch(err => {
             console.log(err.message);
-            next(err);
+            next(err.message);
         })
 
     }
 
     public update = async (req: Request, res: Response, next: NextFunction) => {
+        const user = new CUser(req.body);
+        const { id } = req.params;
 
+        const userUpdated = usersLogic.update(id, user);
+
+        userUpdated.then((user) => {
+            return res.status(200).json({ content: user, message: "user updated" });
+        }).catch(err => {
+            console.log(err.message);
+            next(err.message);
+        })
     }
 
     public delete = async (req: Request, res: Response, next: NextFunction) => {

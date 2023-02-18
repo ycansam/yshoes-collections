@@ -12,3 +12,14 @@ Content-Type: application/json
     "email": "holaa@hola.com"
 }
 
+
+###
+PUT http://localhost:3001/v1/yshoes/users/63f1050ae6d6eaf3c3a63c62
+Content-Type: application/json
+
+{
+    "name": "holaaaaaaaaaa",
+    "username": "hola",
+    "password": "hola",
+    "email": "holaa@hola.com"
+}
