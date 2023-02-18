@@ -3,10 +3,14 @@ import mongoose from 'mongoose';
 import IUser from '../interfaces/users.interface';
 const { Schema } = mongoose;
 
-const validateNoSpaces = (str: String): boolean => {
+const validateNoSpaces = (str: string): boolean => {
     return str.indexOf(' ') === -1;
 }
-
+const isValidEmail = (email: string): boolean => {
+    // Regular expression to match against the email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 const UserModel = new Schema<IUser>({
     username: {
@@ -25,7 +29,9 @@ const UserModel = new Schema<IUser>({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: [isValidEmail, "Email not valid"],
+
     },
     name: { type: String },
     surnames: { type: String },
