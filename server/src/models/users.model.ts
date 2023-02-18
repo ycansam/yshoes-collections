@@ -1,6 +1,7 @@
 
 import mongoose from 'mongoose';
 import IUser from '../interfaces/users.interface';
+import idValidator from 'mongoose-id-validator';
 const { Schema } = mongoose;
 
 const validateNoSpaces = (str: string): boolean => {
@@ -46,4 +47,5 @@ const UserModel = new Schema<IUser>({
     { strict: true }
 );
 mongoose.set('runValidators', true)
+UserModel.plugin(idValidator);
 module.exports = mongoose.model('User', UserModel);

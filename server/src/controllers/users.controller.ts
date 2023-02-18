@@ -1,6 +1,14 @@
 import { Response, Request, NextFunction } from "express";
 import usersLogic from "../logics/users.logic";
 import CUser from "../classes/users.class";
+
+const MESSAGES = {
+    GET: "User obtained",
+    CREATED: "User created",
+    UPDATED: "User updated",
+    DELETED: "User deleted",
+}
+
 class UsersController {
 
     public getById = async (req: Request, res: Response, next: NextFunction) => {
@@ -23,10 +31,10 @@ class UsersController {
         const userCreated = usersLogic.create(user);
 
         userCreated.then(user => {
-            return res.status(200).json({ content: user, message: "user created" });
+            return res.status(200).json({ content: user, message: MESSAGES.CREATED });
         }).catch(err => {
             console.log(err.message);
-            next(err.message);
+            next(err);
         })
 
     }
@@ -38,15 +46,24 @@ class UsersController {
         const userUpdated = usersLogic.update(id, user);
 
         userUpdated.then((user) => {
-            return res.status(200).json({ content: user, message: "user updated" });
+            return res.status(200).json({ content: user, message: MESSAGES.UPDATED });
         }).catch(err => {
             console.log(err.message);
-            next(err.message);
+            next(err);
         })
     }
 
     public delete = async (req: Request, res: Response, next: NextFunction) => {
 
+        const { id } = req.params;
+        const userDeleted = usersLogic.delete(id);
+
+        userDeleted.then((user) => {
+            return res.status(200).json({ content: user, message: MESSAGES.DELETED });
+        }).catch(err => {
+            console.log(err.message);
+            next(err);
+        })
     }
 
 }

@@ -21,5 +21,8 @@ Content-Type: application/json
     "name": "",
     "username": "a",
     "password": "hola",
-    "email": "holaa@hola.com"
+    "email": "holaa@ola.hola"
 }
+
+###
+DELETE  http://localhost:3001/v1/yshoes/users/63f1050ae6d6eaf3c3a63c62

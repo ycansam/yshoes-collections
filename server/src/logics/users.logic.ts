@@ -3,12 +3,15 @@ import CUser from "../classes/users.class";
 const usersModel = require('../models/users.model')
 class UsersLogics extends Logic {
 
-    public getById = async (id: String) => {
+    public getById = (id: String) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const user = await this.model.findById(id);
+                user ? resolve(user) : reject(new Error("user does not exist"))
+            } catch (err) {
+                reject(err);
+            }
 
-        const user = await this.model.findById(id);
-
-        return new Promise((resolve, reject) => {
-            user ? resolve(user) : reject('No se ha encontrado el usuario')
         })
     }
 
@@ -27,8 +30,10 @@ class UsersLogics extends Logic {
     public update = async (id: string, user: CUser): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.model.findByIdAndUpdate(id, user);
-                resolve(true);
+                // Lo busca y lo actualiza. Si no lo encuentra tira un nuevo error
+                const doc = await this.model.findByIdAndUpdate(id, user);
+
+                doc ? resolve(true) : reject(new Error("user does not exist"));
             } catch (err) {
                 reject(err)
             }
@@ -37,7 +42,16 @@ class UsersLogics extends Logic {
     }
 
     public delete = async (id: String) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                // Lo busca y lo elimina. Si no lo encuentra tira un nuevo error
+                const doc = await this.model.findByIdAndDelete(id);
 
+                doc ? resolve(true) : reject(new Error("user does not exist"));
+            } catch (err) {
+                reject(err);
+            }
+        })
     }
 }
 
