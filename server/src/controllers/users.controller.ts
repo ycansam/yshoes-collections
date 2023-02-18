@@ -3,7 +3,7 @@ import usersLogic from "../logics/users.logic";
 
 class UsersController {
 
-    public getOne = async (req: Request, res: Response, next: NextFunction) => {
+    public get = async (req: Request, res: Response, next: NextFunction) => {
 
         const result = usersLogic.getOne();
 
@@ -13,6 +13,16 @@ class UsersController {
             console.log(err);
             next(err);
         })
+    }
+
+    public create = async (req: Request, res: Response, next: NextFunction) => {
+
+    }
+    public update = async (req: Request, res: Response, next: NextFunction) => {
+
+    }
+    public delete = async (req: Request, res: Response, next: NextFunction) => {
+
     }
 
 }

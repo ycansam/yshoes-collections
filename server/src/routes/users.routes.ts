@@ -5,10 +5,19 @@ import usersController from "../controllers/users.controller";
 class UsersRouter extends AppRouter {
     constructor() {
         super();
-        this.getOne();
+        this.get();
+        this.create();
+        this.update();
+        this.delate();
     }
 
-    private getOne = () => this.router.get(Endpoints.USERS.GET, usersController.getOne)
+    private get = () => this.router.get(Endpoints.USERS.GET, usersController.get)
+
+    private create = () => this.router.post(Endpoints.USERS.CREATE, usersController.create);
+
+    private update = () => this.router.put(Endpoints.USERS.UPDATE, usersController.update);
+
+    private delate = () => this.router.delete(Endpoints.USERS.DELETE, usersController.delete);
 
 }
 
