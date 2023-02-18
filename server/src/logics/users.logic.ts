@@ -3,17 +3,7 @@ import CUser from "../classes/users.class";
 const usersModel = require('../models/users.model')
 class UsersLogics extends Logic {
 
-    public getById = (id: String) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const user = await this.model.findById(id);
-                user ? resolve(user) : reject(new Error("user does not exist"))
-            } catch (err) {
-                reject(err);
-            }
-
-        })
-    }
+    public getById = this.getByIdAny
 
     public create = (user: CUser): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
@@ -55,5 +45,5 @@ class UsersLogics extends Logic {
     }
 }
 
-const usersLogic: UsersLogics = new UsersLogics(usersModel);
+const usersLogic: UsersLogics = new UsersLogics(usersModel, CUser, "user");
 export default usersLogic;

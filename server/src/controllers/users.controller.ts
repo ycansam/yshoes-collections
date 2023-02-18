@@ -20,7 +20,7 @@ class UsersController {
         result.then(users => {
             return res.status(200).json(users);
         }).catch(err => {
-            console.log(err);
+            console.log(err.message);
             next(err);
         })
     }

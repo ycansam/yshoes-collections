@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3001/v1/yshoes/users/123
+GET http://localhost:3001/v1/yshoes/users/63f1280f1376cc5bcd198644
 
 ###
 POST http://localhost:3001/v1/yshoes/users/
@@ -14,15 +14,15 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:3001/v1/yshoes/users/63f1050ae6d6eaf3c3a63c62
+PUT http://localhost:3001/v1/yshoes/users/63f124eaf20598964c1201c6
 Content-Type: application/json
 
 {
     "name": "",
     "username": "a",
-    "password": "hola",
+    "password": "aasasd",
     "email": "holaa@ola.hola"
 }
 
 ###
-DELETE  http://localhost:3001/v1/yshoes/users/63f1050ae6d6eaf3c3a63c62
+DELETE  http://localhost:3001/v1/yshoes/users/63f124eaf20598964c1201c6
