@@ -1,6 +1,7 @@
 
 import { Response, Request, NextFunction } from "express";
 import userCartLogic from "../logics/userCart.logic";
+import ICartProduct from "../interfaces/cartProduct.interface";
 class UserCartController {
     private logic: any;
 
@@ -11,9 +12,9 @@ class UserCartController {
     public addProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id_user } = req.params;
-            const { id_product } = req.body;
+            const { id_product, size, color, quantity }: ICartProduct = req.body;
 
-            const productAdded = this.logic.addProduct(id_user, id_product);
+            const productAdded = this.logic.addProduct(id_user, { id_product, size, color, quantity });
 
             productAdded.then((item: any) => {
                 return res.status(200).json({ content: item, message: "product added" });

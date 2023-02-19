@@ -1,9 +1,9 @@
 
 interface ICartProduct {
-    id_product: String;
+    id_product: string;
     quantity: number,
-    color: String,
-    size: String,
+    color: string,
+    size: string,
 }
 
 export default ICartProduct;

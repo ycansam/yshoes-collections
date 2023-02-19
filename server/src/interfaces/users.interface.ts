@@ -7,7 +7,8 @@ interface IUser {
     email: String,
     password: String,
     jwt_access: String,
-    cart: Array<any>
+    cart: Array<any>,
+    save: () => {}
 }
 
 export default IUser;
