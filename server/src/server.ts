@@ -1,11 +1,17 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application, Request, Response, json, urlencoded } from 'express';
 import Endpoints from './Endpoints';
 import UsersRouter from './routes/users.routes';
+import productsRoutes from './routes/products.routes';
 import Database from './database'
 require('dotenv').config();
+const cors = require('cors');
 class Server {
     private app: Application;
     private readonly port: number = 3001;
+    private readonly corsOptions = {
+        origin: '*',
+        optionsSuccessStatus: 200
+    }
 
     constructor() {
         this.app = express();
@@ -17,6 +23,8 @@ class Server {
 
     private configure(): void {
         this.app.use(express.json());
+        this.app.use(cors(this.corsOptions));
+        this.app.use(urlencoded({ extended: false }))
     }
 
     private connectDatabase(): void {
@@ -25,8 +33,9 @@ class Server {
 
     private setRoutes(): void {
         this.app.use(Endpoints.USERS.DEFAULT_PATH, UsersRouter);
-
+        this.app.use(Endpoints.PRODUCTS.DEFAULT_PATH, productsRoutes);
     }
+
 
     private startServer(): void {
         this.app.listen(this.port, () => {

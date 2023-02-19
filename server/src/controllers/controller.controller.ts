@@ -6,12 +6,12 @@ export default class Controller {
 
     private logic: any;
     private classRef: any;
-    private MESSAGES: IMessage;
+    private nameRef: string;
 
-    constructor(logic: any, classRef: any, messages: IMessage) {
+    constructor(logic: any, classRef: any, nameRef: string) {
         this.logic = logic;
         this.classRef = classRef;
-        this.MESSAGES = messages;
+        this.nameRef = nameRef;
     }
 
     protected getByIdAny = async (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +35,7 @@ export default class Controller {
             const itemCreated = this.logic.create(newItem);
 
             itemCreated.then((item: any) => {
-                return res.status(200).json({ content: item, message: this.MESSAGES.CREATED });
+                return res.status(200).json({ content: item, message: this.nameRef + " created" });
             }).catch((err: Error) => {
                 console.log(err.message);
                 next(err);
@@ -53,7 +53,7 @@ export default class Controller {
             const itemUpdated = this.logic.update(id, newItem);
 
             itemUpdated.then((item: any) => {
-                return res.status(200).json({ content: item, message: this.MESSAGES.UPDATED });
+                return res.status(200).json({ content: item, message: this.nameRef + " updated" });
             }).catch((err: Error) => {
                 console.log(err.message);
                 next(err);
@@ -70,7 +70,7 @@ export default class Controller {
             const itemDeleted = this.logic.delete(id);
 
             itemDeleted.then((item: any) => {
-                return res.status(200).json({ content: item, message: this.MESSAGES.DELETED });
+                return res.status(200).json({ content: item, message: this.nameRef + " deleted" });
             }).catch((err: Error) => {
                 console.log(err.message);
                 next(err);

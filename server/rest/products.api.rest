@@ -1,0 +1,31 @@
+###
+GET http://localhost:3001/v1/yshoes/products/63f12ef621190660a2e21d7f
+
+###
+POST http://localhost:3001/v1/yshoes/products/
+Content-Type: application/json
+
+{
+    "name": "holaa",
+    "description": "holaaasdasdaa",
+    "extended_description": "hola",
+    "colors": "holaa@holasdasaasddaa.com",
+    "price": "holaa@holasdasaasddaa.com",
+    "image": "holaa@holasdasaasddaa.com",
+    "currency": "holaa@holasdasaasddaa.com"
+}
+
+
+###
+PUT http://localhost:3001/v1/yshoes/products/63f12ef621190660a2e21d7f
+Content-Type: application/json
+
+{
+    "name": "asdasdasd asdasdasd",
+    "username": "asdas",
+    "password": "aasasd",
+    "email": "holaa@ol.a"
+}
+
+###
+DELETE  http://localhost:3001/v1/yshoes/products/63f1280f1376cc5bcd198644

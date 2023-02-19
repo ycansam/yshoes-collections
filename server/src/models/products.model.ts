@@ -14,7 +14,7 @@ const validateUnitsIntegerAndPositive = (units: number) => {
 }
 
 // Talla Schema para cada uno de los colores
-const SizeSchema = new Schema({ name: { type: String, required: true }, units: { type: Number, validate: { validateUnitsIntegerAndPositive } } });
+const SizeSchema = new Schema({ name: { type: String, required: true }, units: { type: Number, validate: validateUnitsIntegerAndPositive } });
 
 // Cada color puede tener tallas distintas con distintas unides en el stock
 const ColorSchema = new Schema({ name: { type: String, required: true }, images: { type: String }, sizes: { type: [SizeSchema] } });
@@ -23,8 +23,8 @@ const ProductModel = new Schema({
     name: { type: String, required: true }, // nombre
     description: { type: String }, // descripcion
     extended_description: { type: String }, // descripcion extendida
-    colors: { type: [ColorSchema], validate: { minimumColorsLength } }, // colores
-    price: { type: Number, set: (p: Number) => p.toFixed(2) }, // precio
+    colors: { type: [ColorSchema] }, // colores
+    price: { type: Number, set: (p: Number) => p.toFixed(2), required: true }, // precio
     image: { type: String, default: 'https://i8.amplience.net/i/jpl/jd_027536_a?qlt=92' },
     currency: { type: String, enum: ['EUR', 'USD'] }
 });
