@@ -6,8 +6,15 @@ POST http://localhost:3001/v1/yshoes/cart/add/63f12ef621190660a2e21d7f
 Content-Type: application/json
 
 {
-    "id_product": "63f21521bac6482a4aa3bfd3",
+    "id_product": "63f21521bac6480a4aa3bfd3",
     "size": "extralarge",
     "color": "blue"
 }
 
+###
+POST http://localhost:3001/v1/yshoes/cart/remove/63f12ef621190660a2e21d7f
+Content-Type: application/json
+
+{
+    "id_in_cart": "63f248e29db30f47e8f3d02c"
+}

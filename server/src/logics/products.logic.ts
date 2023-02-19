@@ -1,6 +1,6 @@
 import Logic from "./logic.logic";
 import CProduct from "../classes/products.class";
-import productsModel from "../models/products.model";
+const ProductsModel = require("../models/products.model");
 class ProductsLogic extends Logic {
 
     public getById = this.getByIdAny
@@ -12,5 +12,5 @@ class ProductsLogic extends Logic {
     public delete = this.deleteAnyById
 }
 
-const productsLogic: ProductsLogic = new ProductsLogic(productsModel, CProduct, "product");
+const productsLogic: ProductsLogic = new ProductsLogic(ProductsModel, CProduct, "product");
 export default productsLogic;

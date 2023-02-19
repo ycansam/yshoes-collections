@@ -4,6 +4,7 @@ interface ICartProduct {
     quantity: number,
     color: string,
     size: string,
+    _id?: string
 }
 
 export default ICartProduct;

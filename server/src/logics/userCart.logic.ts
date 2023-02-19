@@ -53,8 +53,32 @@ class UserCartLogic {
         })
     }
 
-    public removeProduct = async (id_user: string, id_product: string) => {
+    private removeProductFromCart = (cart: Array<ICartProduct>, id_in_cart: string): Array<ICartProduct> => {
+        //  == por que compara Object id con string
+        const index = cart.findIndex(item => item._id == id_in_cart);
+        if (index !== -1) {
+            cart.splice(index, 1)
+            return cart;
+        }
+        throw new Error("Selected product does not exist on cart");
+    }
 
+    public removeProduct = async (id_user: string, id_in_cart: string) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+
+                // busca el user
+                let userDoc: IUser = await this.findUserDoc(id_user);
+
+                // busca el producto en el carrito
+                const cart = this.removeProductFromCart(userDoc.cart, id_in_cart);
+                userDoc.cart = cart;
+                const userUpdated = userDoc.save();
+                userUpdated ? resolve(true) : reject(new Error("Product wasn't added"));
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 
 }
