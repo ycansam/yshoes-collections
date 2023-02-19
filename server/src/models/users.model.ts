@@ -39,8 +39,15 @@ const UserModel = new Schema<IUser>({
     jwt_access: { type: String },
     cart: {
         type: [{
-            type: Schema.Types.ObjectId,
-            ref: "Product"
+            id_product: {
+                type: Schema.Types.ObjectId,
+                ref: "Product",
+                required: true,
+            },
+            quantity: { type: Number, required: true, default: 1 },
+            color: { type: String },
+            size: { type: String },
+            _id: false
         }]
     }
 });

@@ -1,6 +1,4 @@
 import { Response, Request, NextFunction } from "express";
-import IMessage from "../interfaces/message.interface";
-
 
 export default class Controller {
 

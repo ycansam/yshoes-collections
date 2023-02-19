@@ -38,4 +38,4 @@ const ProductModel = new Schema({
 
 
 ProductModel.plugin(idValidator);
-export default mongoose.model('Product', ProductModel);
+module.exports = mongoose.model('Product', ProductModel);
