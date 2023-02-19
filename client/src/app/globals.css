@@ -37,6 +37,15 @@ a {
   font-weight: 100;
 }
 
+.btn-2{
+  padding:  0.75rem 1.5rem;
+  background-color: black;
+  border-radius: var(--border-radius);
+  font-size: 17px;
+  color: white;
+  font-weight: 400;
+}
+
 
 .btn-1:hover{
   border-width: 4px;

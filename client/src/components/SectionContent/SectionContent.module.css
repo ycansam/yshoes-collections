@@ -1,0 +1,23 @@
+.mainContainer {
+    width: 100%;
+    padding: 2rem 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer>h1 {
+    margin-bottom: 1rem;
+    font-weight: 100;
+    font-size: 40px;
+}
+
+.mainContainer>p {
+    margin-bottom: 1rem;
+    color: rgba(0, 0, 0, 0.681);
+}
+
+.mainContainer>* {
+    text-align: center;
+}

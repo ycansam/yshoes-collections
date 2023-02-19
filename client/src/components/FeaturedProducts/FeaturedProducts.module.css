@@ -1,0 +1,22 @@
+.mainContainer {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding: 3rem 10rem;
+}
+.mainContainer>h1{
+    margin-bottom: 2rem;
+}
+
+.containerProducts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 2rem;
+}
+
+.mainContainer>button{
+    display: block;
+    width: max-content;
+    align-self: center;
+}

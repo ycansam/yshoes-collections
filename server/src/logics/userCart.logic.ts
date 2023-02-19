@@ -1,5 +1,4 @@
 
-import { AnyKeys, Model } from "mongoose";
 import ICartProduct from "../interfaces/cartProduct.interface";
 import IUser from "../interfaces/users.interface";
 const UsersModel = require('../models/users.model')
@@ -33,6 +32,17 @@ class UserCartLogic {
         return userDoc;
     }
 
+    private removeProductFromCart = (cart: Array<ICartProduct>, id_in_cart: string): Array<ICartProduct> => {
+        //  == por que compara Object id con string
+        const index = cart.findIndex(item => item._id == id_in_cart);
+        if (index !== -1) {
+            cart.splice(index, 1)
+            return cart;
+        }
+        throw new Error("Selected product does not exist on cart");
+    }
+
+
     public addProduct = async (id_user: string, { id_product, quantity, color, size }: ICartProduct): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -53,15 +63,6 @@ class UserCartLogic {
         })
     }
 
-    private removeProductFromCart = (cart: Array<ICartProduct>, id_in_cart: string): Array<ICartProduct> => {
-        //  == por que compara Object id con string
-        const index = cart.findIndex(item => item._id == id_in_cart);
-        if (index !== -1) {
-            cart.splice(index, 1)
-            return cart;
-        }
-        throw new Error("Selected product does not exist on cart");
-    }
 
     public removeProduct = async (id_user: string, id_in_cart: string) => {
         return new Promise(async (resolve, reject) => {
@@ -72,8 +73,10 @@ class UserCartLogic {
 
                 // busca el producto en el carrito
                 const cart = this.removeProductFromCart(userDoc.cart, id_in_cart);
+                
                 userDoc.cart = cart;
                 const userUpdated = userDoc.save();
+
                 userUpdated ? resolve(true) : reject(new Error("Product wasn't added"));
             } catch (err) {
                 reject(err)
