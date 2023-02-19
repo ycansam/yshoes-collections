@@ -4,12 +4,20 @@ import ICartProduct from "../interfaces/cartProduct.interface";
 import IUser from "../interfaces/users.interface";
 const UsersModel = require('../models/users.model')
 const ProductsModel = require('../models/products.model')
+
 class UserCartLogic {
 
     private checkProductExist = async (id_product: string): Promise<void> => {
         const product = await ProductsModel.findById(id_product);
         if (!product)
-            throw new Error("product doest not exist");
+            throw new Error("Product does not exist");
+    }
+
+    private findUserDoc = async (id_user: string): Promise<IUser> => {
+        const userDoc: IUser = await UsersModel.findById(id_user);
+        if (userDoc)
+            return userDoc
+        throw new Error("User does not exist")
     }
 
     private updateOrAddProductOnCart = async (userDoc: IUser, { id_product, quantity, color, size }: ICartProduct): Promise<IUser> => {
@@ -22,36 +30,30 @@ class UserCartLogic {
         } else {
             userDoc.cart.push({ id_product, quantity, color, size })
         }
-        userDoc.save();
         return userDoc;
     }
-
-    private findUserDoc = async (id_user: string): Promise<IUser> => {
-        const userDoc: IUser = await UsersModel.findById(id_user);
-        if (userDoc)
-            return userDoc
-        throw new Error("User doest not exist")
-    }
-
 
     public addProduct = async (id_user: string, { id_product, quantity, color, size }: ICartProduct): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
                 // Comprueba primero que el producto exista
-                this.checkProductExist(id_product);
+                await this.checkProductExist(id_product);
 
                 // busca el user
                 const userDoc: IUser = await this.findUserDoc(id_user);
 
-                // busca el producto en el carro
+                // busca el producto en el carrito
                 const userDocUpdated: IUser = await this.updateOrAddProductOnCart(userDoc, { id_product, quantity, color, size });
+                userDocUpdated.save();
 
-                console.log(userDocUpdated);
-                userDoc ? resolve(true) : reject(new Error("Product wasn't added"));
+                userDocUpdated ? resolve(true) : reject(new Error("Product wasn't added"));
             } catch (err) {
                 reject(err)
             }
         })
+    }
+
+    public removeProduct = async (id_user: string, id_product: string) => {
 
     }
 
