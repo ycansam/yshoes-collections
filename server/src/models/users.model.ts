@@ -44,8 +44,6 @@ const UserModel = new Schema<IUser>({
         }]
     }
 });
-mongoose.set('runValidators', true)
-mongoose.set('strictQuery', true)
 
 UserModel.plugin(idValidator);
 module.exports = mongoose.model('User', UserModel);

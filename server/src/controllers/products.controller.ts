@@ -5,7 +5,7 @@ import productsLogic from "../logics/products.logic";
 class ProductsController extends Controller {
 
     public getById = this.getByIdAny
-
+    
     public create = this.createAny
 
     public update = this.updateAny

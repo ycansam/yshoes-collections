@@ -9,23 +9,34 @@ Content-Type: application/json
     "name": "holaa",
     "description": "holaaasdasdaa",
     "extended_description": "hola",
-    "colors": "holaa@holasdasaasddaa.com",
-    "price": "holaa@holasdasaasddaa.com",
+    "colors": [],
+    "price": 25.5,
     "image": "holaa@holasdasaasddaa.com",
-    "currency": "holaa@holasdasaasddaa.com"
+    "currency": "EUR"
 }
 
 
 ###
-PUT http://localhost:3001/v1/yshoes/products/63f12ef621190660a2e21d7f
+PUT http://localhost:3001/v1/yshoes/products/63f21521bac6480a4aa3bfd3
 Content-Type: application/json
 
 {
     "name": "asdasdasd asdasdasd",
-    "username": "asdas",
-    "password": "aasasd",
-    "email": "holaa@ol.a"
+    "price": 225.5123123123,
+    "colors": [
+        {
+            "name": "rabo",
+            "images": ["hola", "hola2"],
+            "sizes": [
+                {
+                    "name": "45",
+                    "units": "6" 
+                }
+            ]
+        }
+    ]
+
 }
 
 ###
-DELETE  http://localhost:3001/v1/yshoes/products/63f1280f1376cc5bcd198644
+DELETE  http://localhost:3001/v1/yshoes/products/63f215812ca570fedccf3e38

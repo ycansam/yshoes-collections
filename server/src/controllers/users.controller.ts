@@ -3,12 +3,6 @@ import CUser from "../classes/users.class";
 import IMessage from "../interfaces/message.interface";
 import Controller from "./controller.controller";
 
-const MESSAGES: IMessage = {
-    GET: "User obtained",
-    CREATED: "User created",
-    UPDATED: "User updated",
-    DELETED: "User deleted",
-}
 
 class UsersController extends Controller {
 
@@ -22,5 +16,5 @@ class UsersController extends Controller {
 
 }
 
-const usersController: UsersController = new UsersController(usersLogic, CUser, MESSAGES);
+const usersController: UsersController = new UsersController(usersLogic, CUser, "user");
 export default usersController;

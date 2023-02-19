@@ -1,6 +1,7 @@
 import Logic from "./logic.logic";
 import CUser from "../classes/users.class";
 const usersModel = require('../models/users.model')
+
 class UsersLogics extends Logic {
 
     public getById = this.getByIdAny
