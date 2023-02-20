@@ -4,8 +4,7 @@ import jwt from 'jsonwebtoken';
 import { useRouter } from "next/navigation";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-
-export function checkAuthorization(handler: NextApiHandler, pageRole: string): NextApiHandler {
+export function checkAuthorizationPageByRole(handler: NextApiHandler, pageRole: string): NextApiHandler {
 
     return (req: NextApiRequest, res: NextApiResponse) => {
         // Perform some logic to check if the user is authorized to access the page
@@ -38,4 +37,4 @@ export function checkAuthorization(handler: NextApiHandler, pageRole: string): N
     }
 }
 
-export default checkAuthorization;
+export default checkAuthorizationPageByRole;

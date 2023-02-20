@@ -7,9 +7,9 @@ import ROLES from '@/utils/roles.variables';
 function Admin() {
 
   return (
-    <section className={styles.mainContainer}>
+    <div className={styles.mainContainer}>
       <h1>Zona de Administrador</h1>
-    </section>
+    </div>
   )
 }
 
