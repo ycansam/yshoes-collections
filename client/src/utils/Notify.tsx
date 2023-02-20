@@ -5,41 +5,26 @@ const ToastTypes = {
     ERROR: 'ERROR',
     WARNING: 'WARNING'
 }
+const toastStyle: any = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+}
 const Notify = (message: string, type: string) => {
     switch (type) {
         case ToastTypes.SUCCESS:
-            console.log("a")
-            toast.success(message, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                theme: "light",
-            });
+            toast.success(message, toastStyle);
             break;
         case ToastTypes.ERROR:
-            toast.error(message, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                theme: "light",
-            });
+            toast.error(message, toastStyle);
             break;
         case ToastTypes.WARNING:
-            toast.warning(message, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                theme: "light",
-            });
+            toast.warning(message, toastStyle);
             break;
         default:
             break;

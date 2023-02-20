@@ -1,6 +1,6 @@
 .mainContainer {
     width: 100%;
-    padding: 2rem 35rem;
+    padding: 2rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +16,7 @@
 .mainContainer>p {
     margin-bottom: 1rem;
     color: rgba(0, 0, 0, 0.681);
+    max-width: 50rem;
 }
 
 .mainContainer>* {
