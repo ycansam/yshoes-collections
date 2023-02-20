@@ -1,6 +1,6 @@
 
 import router from "@/utils/service-router";
-
+import headers from "@/utils/headers-router";
 
 class UsersService {
 
@@ -9,7 +9,8 @@ class UsersService {
     }
 
     login(data: any) {
-        return router.post("/users/login", data);
+        
+        return router.post("/users/login", data, headers());
     }
 
 }

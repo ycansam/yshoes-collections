@@ -1,7 +1,11 @@
 import Logic from "./logic.logic";
 import CUser from "../classes/users.class";
+import IUser from "../interfaces/users.interface";
 const usersModel = require('../models/users.model')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+
 class UsersLogics extends Logic {
 
     public getById = this.getByIdAny
@@ -12,9 +16,10 @@ class UsersLogics extends Logic {
 
     public delete = this.deleteAnyById
 
-    public login = async ({ username, password }) => {
+
+    private Authenticate = async (username: string, password: string) => {
         // find the user by email
-        const user = await usersModel.findOne({ username });
+        const user: IUser = await usersModel.findOne({ username });
 
         // if no user is found, return an error
         if (!user) {
@@ -28,9 +33,20 @@ class UsersLogics extends Logic {
         if (!isMatch) {
             throw new Error('Invalid email or password');
         }
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.SECRET_JWT, { expiresIn: 86400 });
+        
+        // actualiza el token del usuario
+        this.update(user._id, { jwt_access: token })
+        
+        return token;
+    }
+
+
+    public login = async ({ username, password }) => {
 
         // if the passwords match, create a JWT and return it to the client
-        const token = "createToken(user)";
+        const token = this.Authenticate(username, password);
+
         return token;
     }
 }

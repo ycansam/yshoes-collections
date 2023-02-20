@@ -3,6 +3,7 @@ import Button from '@/components/Button/Button';
 import styles from './LoginForm.module.css'
 import { useState } from 'react';
 import usersService from '@/services/users.service';
+import LOCAL_STORAGE_VARIABLES from '@/utils/localstoragevariables';
 
 type TLogin = {
     username: string;
@@ -23,10 +24,10 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
 
         usersService.login(state).then(res => {
-            console.log(res);
+            const { token } = res.data.content;
+            localStorage.setItem(LOCAL_STORAGE_VARIABLES.TOKEN, token)
         }).catch(err => {
-            console.error(err);
-            // console.log(err.response.data)
+            console.log(err.response.data)
         })
     };
 

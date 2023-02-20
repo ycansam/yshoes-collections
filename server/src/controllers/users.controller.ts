@@ -22,9 +22,8 @@ class UsersController extends Controller {
             const token = usersLogic.login({ username, password });
 
             token.then((token: any) => {
-                return res.status(200).json({ content: token, message: "User logged" });
+                return res.status(200).json({ content: { token }, message: "User logged" });
             }).catch((err: Error) => {
-                // console.log(err.message);
                 next(err);
             })
         } catch (err) {
