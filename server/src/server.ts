@@ -1,10 +1,12 @@
+require('dotenv').config();
 import express, { Application, Request, Response, json, urlencoded } from 'express';
 import Endpoints from './Endpoints';
 import UsersRouter from './routes/users.routes';
 import productsRoutes from './routes/products.routes';
 import userCartRoutes from './routes/userCart.routes';
-import Database from './database'
-require('dotenv').config();
+import Database from './database';
+import { errorHandler } from './middlewares/errorhandler.middleware';
+
 const cors = require('cors');
 class Server {
     private app: Application;
@@ -33,9 +35,9 @@ class Server {
     }
 
     private setRoutes(): void {
-        this.app.use(Endpoints.USERS.DEFAULT_PATH, UsersRouter);
-        this.app.use(Endpoints.PRODUCTS.DEFAULT_PATH, productsRoutes);
-        this.app.use(Endpoints.CART.DEFAULT_PATH, userCartRoutes);
+        this.app.use(Endpoints.USERS.DEFAULT_PATH, UsersRouter, errorHandler);
+        this.app.use(Endpoints.PRODUCTS.DEFAULT_PATH, productsRoutes, errorHandler);
+        this.app.use(Endpoints.CART.DEFAULT_PATH, userCartRoutes, errorHandler);
     }
 
 

@@ -19,12 +19,12 @@ class UsersController extends Controller {
 
             const { username, password } = req.body;
 
-            const itemCreated = usersLogic.login({ username, password });
+            const token = usersLogic.login({ username, password });
 
-            itemCreated.then((item: any) => {
-                return res.status(200).json({ content: item, message: "User logged" });
+            token.then((token: any) => {
+                return res.status(200).json({ content: token, message: "User logged" });
             }).catch((err: Error) => {
-                console.log(err.message);
+                // console.log(err.message);
                 next(err);
             })
         } catch (err) {

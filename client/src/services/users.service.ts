@@ -8,6 +8,10 @@ class UsersService {
         return router.post("/users/", data);
     }
 
+    login(data: any) {
+        return router.post("/users/login", data);
+    }
+
 }
 
 const usersService = new UsersService();

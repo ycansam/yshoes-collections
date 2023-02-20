@@ -21,11 +21,13 @@ const LoginForm: React.FC = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // usersService.create(state).then(res => {
-        //     console.log(res);
-        // }).catch(err => {
-        //     console.log(err.message);
-        // })
+
+        usersService.login(state).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.error(err);
+            // console.log(err.response.data)
+        })
     };
 
     return (
