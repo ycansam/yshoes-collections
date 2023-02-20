@@ -8,6 +8,7 @@ export default class Endpoints {
         CREATE: "/",
         UPDATE: "/:id",
         DELETE: "/:id",
+        LOGIN: "/login"
     };
 
     static readonly CART = {

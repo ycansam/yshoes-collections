@@ -6,8 +6,8 @@ import usersService from '@/services/users.service';
 
 type RegisterForm = {
     username: string;
-    surname: string;
     email: string;
+    password: string;
 }
 
 const RegisterForm: React.FC<any> = () => {
@@ -18,7 +18,7 @@ const RegisterForm: React.FC<any> = () => {
     })
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState((state): any => ({ ...state, [event.target.name]: event.target.value }))
+        setState((state): RegisterForm => ({ ...state, [event.target.name]: event.target.value }))
         console.log(state);
     }
 

@@ -11,6 +11,10 @@ class UsersLogics extends Logic {
     public update = this.updateAny
 
     public delete = this.deleteAnyById
+
+    public login = async ({ username, password }) => {
+
+    }
 }
 
 const usersLogic: UsersLogics = new UsersLogics(usersModel, CUser, "user");

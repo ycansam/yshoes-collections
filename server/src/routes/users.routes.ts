@@ -15,6 +15,8 @@ class UsersRouter extends AppRouter {
 
     private create = () => this.router.post(Endpoints.USERS.CREATE, usersController.create);
 
+    private login = () => this.router.post(Endpoints.USERS.LOGIN, usersController.login);
+
     private update = () => this.router.put(Endpoints.USERS.UPDATE, usersController.update);
 
     private delate = () => this.router.delete(Endpoints.USERS.DELETE, usersController.delete);

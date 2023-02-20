@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import IUser from '../interfaces/users.interface';
 import idValidator from 'mongoose-id-validator';
 const { Schema } = mongoose;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 const validateNoSpaces = (str: string): boolean => {
     return str.indexOf(' ') === -1;
@@ -50,6 +53,32 @@ const UserModel = new Schema<IUser>({
         }]
     }
 });
+
+UserModel.pre('save', function (next) {
+    const user = this;
+  
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) {
+      return next();
+    }
+  
+    // generate a salt and hash the password using bcrypt
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) {
+        return next(err);
+      }
+  
+      bcrypt.hash(user.password, salt, function (err, hash) {
+        if (err) {
+          return next(err);
+        }
+  
+        // override the plaintext password with the hashed one
+        user.password = hash;
+        next();
+      });
+    });
+  });
 
 UserModel.plugin(idValidator);
 module.exports = mongoose.model('User', UserModel);
