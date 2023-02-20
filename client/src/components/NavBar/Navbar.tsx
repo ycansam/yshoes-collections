@@ -1,7 +1,9 @@
+// 'use client';
 import React from "react";
 import styles from "./NavBar.module.css";
 import NavBarItems from "./NavBar.items";
-
+// import Navigate from "@/utils/Navigate";
+import Link from 'next/link';
 interface ItemNavbar {
     name: string;
     path: string;
@@ -19,10 +21,13 @@ const ItemNav: React.FC<ItemNavbar> = ({ name, path }) => {
 // Componente principal nav
 const NavBar: React.FC = () => {
 
+
+
     return (
         <nav className={styles.mainContainer}>
             <div>
-                <img className={styles.logo} alt="logo yshoes" src="https://cdn.shopify.com/s/files/1/0653/9332/8396/files/DALL_E_2022-12-07_20.23.30.png?v=1670444788&width=500"></img>
+
+                <Link href="/">  <img className={styles.logo} alt="logo yshoes" src="https://cdn.shopify.com/s/files/1/0653/9332/8396/files/DALL_E_2022-12-07_20.23.30.png?v=1670444788&width=500"></img></Link>
 
                 {NavBarItems.map((item, index) => {
                     return <ItemNav key={index} name={item.name} path={item.path} />
@@ -30,7 +35,7 @@ const NavBar: React.FC = () => {
             </div>
             <div className={styles.divIcons}>
                 <i className="bi bi-search"></i>
-                <i className="bi bi-person"></i>
+                <Link href="/login"> <i className="bi bi-person"></i></Link>
                 <i className="bi bi-bag"></i>
             </div>
         </nav>

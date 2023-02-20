@@ -45,6 +45,9 @@ a {
   color: white;
   font-weight: 400;
 }
+button:hover{
+  cursor: pointer;
+}
 
 
 .btn-1:hover{

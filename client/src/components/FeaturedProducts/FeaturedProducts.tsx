@@ -31,7 +31,7 @@ const FeaturedProducts: React.FC = () => {
             currency: "EUR"
         }
     ]
- 
+
     return (
         <div className={styles.mainContainer}>
             <h1>{FeaturedProductsContents.featuredProducts.h1}</h1>

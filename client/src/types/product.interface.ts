@@ -1,7 +1,7 @@
-interface IProductView {
+type TProductView = {
     image: string,
     name: string,
     price: number,
     currency: string
 }
-export default IProductView;
+export default TProductView;
