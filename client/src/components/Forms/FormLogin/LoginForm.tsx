@@ -4,7 +4,7 @@ import styles from './LoginForm.module.css'
 import { useState } from 'react';
 import usersService from '@/services/users.service';
 import LOCAL_STORAGE_VARIABLES from '@/utils/localstoragevariables';
-
+import notify from '@/utils/Notify';
 type TLogin = {
     username: string;
     password: string;
@@ -24,10 +24,12 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
 
         usersService.login(state).then(res => {
+            notify.Toast(res.data.message, notify.ToastTypes.SUCCESS);
             const { token } = res.data.content;
             localStorage.setItem(LOCAL_STORAGE_VARIABLES.TOKEN, token)
         }).catch(err => {
             console.log(err.response.data)
+            notify.Toast(err.response.data.message, notify.ToastTypes.ERROR);
         })
     };
 

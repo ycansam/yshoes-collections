@@ -1,5 +1,8 @@
+'use client'
 import './globals.css'
 import NavBar from '@/components/NavBar/Navbar'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RootLayout({
   children,
@@ -17,8 +20,19 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Assistant"></link>
       </head>
       <body>
+
         <NavBar />
         {children}
+        <ToastContainer
+          position="top-right"
+          autoClose={8000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          draggable={false}
+          closeOnClick
+          pauseOnHover
+        />
+
       </body>
     </html>
   )
