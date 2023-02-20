@@ -1,10 +1,9 @@
-// 'use client';
+'use client';
 import React from "react";
 import styles from "./NavBar.module.css";
 import NavBarItems from "./NavBar.items";
-// import Navigate from "@/utils/Navigate";
 import Link from 'next/link';
-interface ItemNavbar {
+type ItemNavbar = {
     name: string;
     path: string;
 }
@@ -20,8 +19,6 @@ const ItemNav: React.FC<ItemNavbar> = ({ name, path }) => {
 
 // Componente principal nav
 const NavBar: React.FC = () => {
-
-
 
     return (
         <nav className={styles.mainContainer}>

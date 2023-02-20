@@ -9,8 +9,7 @@ class UsersService {
     }
 
     login(data: any) {
-        
-        return router.post("/users/login", data, headers());
+        return router.post("/users/login", data);
     }
 
 }
