@@ -2,6 +2,8 @@
 import styles from './page.module.css'
 import { useEffect, useState } from 'react';
 import userCheckoutCacheService from '@/services/cache/user-checkout.service-cache';
+import FormPayment from '@/components/Forms/FormPayment/FormPayment';
+
 const Payment: React.FC = (): JSX.Element => {
 
   const [userCheckoutInfo, setUserCheckoutInfo] = useState<any>({})
@@ -9,6 +11,7 @@ const Payment: React.FC = (): JSX.Element => {
   useEffect(() => {
     setUserCheckoutInfo(userCheckoutCacheService.getCheckout());
   }, [])
+
   console.log(userCheckoutInfo);
   if (!userCheckoutInfo) return <></>
 
@@ -18,7 +21,7 @@ const Payment: React.FC = (): JSX.Element => {
         <h1>Pago</h1>
         <h2>Envios</h2>
         <p>Standart - Gratis</p>
-        <button></button>
+        <FormPayment />
       </div>
       <div>
         {/* Summary Content */}
