@@ -1,6 +1,6 @@
 
 import LOCAL_STORAGE_VARIABLES from "@/utils/constants/local-storage.constants";
-import Token from "@/types/token.interface";
+import Token from "@/models/token.interface";
 class UserTokenCacheService {
 
     public storageToken(token: string): void {

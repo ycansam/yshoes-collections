@@ -4,7 +4,8 @@ const PATHS = {
         REGISTER: '/register'
     },
     USER: {
-        ACCOUNT: '/account'
+        ACCOUNT: '/account',
+        CART: '/cart'
     },
     ERROR: '/error',
     UNAUTHORIZED: "/unauthorized"

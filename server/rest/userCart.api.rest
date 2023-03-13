@@ -1,8 +1,8 @@
 ###
-GET http://localhost:3001/v1/yshoes/users/63f12ef621190660a2e21d7f
+GET http://localhost:3001/v1/yshoes/cart/63f3a5c8a2543b181dc25c0f
 
 ###
-POST http://localhost:3001/v1/yshoes/cart/add/63f12ef621190660a2e21d7f
+POST http://localhost:3001/v1/yshoes/cart/add/63f3a5c8a2543b181dc25c0f
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/v1/yshoes/cart/remove/63f12ef621190660a2e21d7f
+POST http://localhost:3001/v1/yshoes/cart/remove/63f3a5c8a2543b181dc25c0f
 Content-Type: application/json
 
 {

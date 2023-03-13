@@ -30,13 +30,15 @@ const LoginForm: React.FC = () => {
         usersService.login(state).then(res => {
             notify.Toast(res.data.message, notify.ToastTypes.SUCCESS);
             const { token } = res.data.content;
-            router.push(PATHS.USER.ACCOUNT)
             userTokenCacheService.storageToken(token);
+            router.push(PATHS.USER.CART)
         }).catch(err => {
             console.log(err.response.data)
             notify.Toast(err.response.data.message, notify.ToastTypes.ERROR);
         })
     };
+
+
 
     return (
         <form className={styles.formLogin} onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import PATHS from './PAGE_PATHS';
 import userTokenCacheService from '@/services/cache/user-token.service-cache';
-import Token from "@/types/token.interface";
+import Token from "@/models/token.interface";
 export function checkAuthorizationPageByRole(handler: NextApiHandler, pageRole: string): NextApiHandler {
 
     return (req: NextApiRequest, res: NextApiResponse) => {

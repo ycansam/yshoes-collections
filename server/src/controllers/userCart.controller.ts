@@ -4,6 +4,25 @@ import userCartLogic from "../logics/userCart.logic";
 import ICartProduct from "../interfaces/cartProduct.interface";
 class UserCartController {
 
+
+    public getByUser = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { id_user } = req.params;
+
+            const response = userCartLogic.getByUser(id_user);
+
+            response.then((cart: any) => {
+                return res.status(200).json({ content: cart, message: "cart obtained" });
+            }).catch((err: Error) => {
+                console.log(err.message);
+                next(err);
+            })
+        } catch (err) {
+            next(err);
+        }
+
+    }
+
     public addProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id_user } = req.params;

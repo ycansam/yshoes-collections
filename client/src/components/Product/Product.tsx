@@ -1,5 +1,5 @@
 import React from "react";
-import IProductView from "@/types/product.interface";
+import IProductView from "@/models/product.interface";
 import styles from './Product.module.css'
 
 const Product: React.FC<IProductView> = ({ image, name, price, currency }) => {
