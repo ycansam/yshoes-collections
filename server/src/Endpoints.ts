@@ -20,6 +20,11 @@ export default class Endpoints {
         REMOVE_PRODUCT: "/remove/:id_user"
     };
 
+    static readonly CHECKOUT = {
+        DEFAULT_PATH: this.DEFAULT_PATH + "/checkout",
+        ADD_CHECKOUT: '/'
+    };
+
     static readonly PRODUCTS = {
         DEFAULT_PATH: this.DEFAULT_PATH + "/products",
         GET: "/",

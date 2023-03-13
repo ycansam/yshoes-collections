@@ -2,7 +2,7 @@
 import styles from './page.module.css'
 import { useEffect, useState } from 'react';
 import userCheckoutCacheService from '@/services/cache/user-checkout.service-cache';
-import FormPayment from '@/components/Forms/FormPayment/FormPayment';
+import FormPayment from '@/components/Forms/FormStripe/FormStripe';
 
 const Payment: React.FC = (): JSX.Element => {
 

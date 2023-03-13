@@ -1,6 +1,5 @@
 import Endpoints from "../Endpoints";
 import AppRouter from "../router";
-import usersController from "../controllers/users.controller";
 import usersCartController from "../controllers/userCart.controller";
 
 class UsersRouter extends AppRouter {

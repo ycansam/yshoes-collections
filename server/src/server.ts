@@ -7,6 +7,7 @@ import productsRoutes from './routes/products.routes';
 import userCartRoutes from './routes/userCart.routes';
 import Database from './database';
 import { errorHandler } from './middlewares/errorhandler.middleware';
+import checkoutsRoutes from './routes/checkouts.routes';
 const cors = require('cors');
 
 
@@ -42,6 +43,7 @@ class Server {
         this.app.use(Endpoints.USERS.DEFAULT_PATH, UsersRouter, errorHandler);
         this.app.use(Endpoints.PRODUCTS.DEFAULT_PATH, productsRoutes, errorHandler);
         this.app.use(Endpoints.CART.DEFAULT_PATH, userCartRoutes, errorHandler);
+        this.app.use(Endpoints.CHECKOUT.DEFAULT_PATH, checkoutsRoutes, errorHandler);
     }
 
 
