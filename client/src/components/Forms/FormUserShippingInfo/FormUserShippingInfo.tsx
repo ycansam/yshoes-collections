@@ -6,16 +6,17 @@ import Link from 'next/link';
 import PATHS from '@/utils/PAGE_PATHS';
 import Button from '@/components/Button/Button';
 import UserCheckoutCacheService from '@/services/cache/user-checkout.service-cache';
+import UserShipping from './models/UserShipping.interface';
 const FormCheckout: React.FC = () => {
     const router = useRouter();
 
-    const [state, setState] = useState({
+    const [state, setState] = useState<UserShipping>({
         country: '',
         name: '',
         surnames: '',
         address: '',
         houseAddress: '',
-        postalCode: '',
+        postalCode: 0,
         city: '',
         state: '',
         phone: '',

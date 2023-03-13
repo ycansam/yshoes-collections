@@ -9,7 +9,8 @@ import CartReturns from '../models/return.interface';
 const CartHooks = (): CartReturns => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [cart, setCart] = useState<CartProduct[]>([])
+    const [cart, setCart] = useState<CartProduct[]>([]);
+    const [subtotal, setSubTotal] = useState<number>(0);
 
     useEffect(() => {
         getUserCart();
@@ -18,8 +19,14 @@ const CartHooks = (): CartReturns => {
     const getUserCart = () => {
         const token = userTokenCacheService.getToken() as Token;
         UserCartService.getByUser(token.id).then(res => {
-            setCart(res.data.content);
-            console.log(res.data);
+            const content = res.data.content as CartProduct[];
+            setCart(content);
+
+            const amount = content.reduce((a: any, b: CartProduct) => {
+                return a + (b.id_product.price * b.quantity);
+            }, 0)
+            setSubTotal(amount);
+
         }).catch(err => {
             console.log(err);
         }).finally(() => {
@@ -27,7 +34,7 @@ const CartHooks = (): CartReturns => {
         });
     }
 
-    return { cart, isLoading }
+    return { cart, isLoading, subtotal }
 }
 
 export default CartHooks;

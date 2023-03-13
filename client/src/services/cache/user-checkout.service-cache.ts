@@ -1,4 +1,5 @@
 
+import UserCheckout from "@/models/user-checkout.interface";
 import LOCAL_STORAGE_VARIABLES from "@/utils/constants/local-storage.constants";
 class UserCheckoutCacheService {
 
@@ -17,7 +18,7 @@ class UserCheckoutCacheService {
         localStorage.setItem(LOCAL_STORAGE_VARIABLES.USER_CHECKOUT, JSON.stringify(data))
     }
 
-    public getCheckout(): object | null {
+    public getCheckout(): UserCheckout | null {
         const cartData = this.getStorageData();
         if (!cartData) return null;
         return JSON.parse(cartData);

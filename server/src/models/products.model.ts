@@ -35,7 +35,5 @@ const ProductModel = new Schema({
     currency: { type: String, enum: ['EUR', 'USD'] }
 });
 
-
-
 ProductModel.plugin(idValidator);
 module.exports = mongoose.model('Product', ProductModel);

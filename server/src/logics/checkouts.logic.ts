@@ -14,7 +14,6 @@ class CheckoutsLogic {
                     confirm: true
                 })
                 console.log(payment)
-
                 resolve({ payment, message: 'Payment Success' })
             } catch (err) {
                 console.log(err);
