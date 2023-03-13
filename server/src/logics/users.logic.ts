@@ -5,6 +5,7 @@ const usersModel = require('../models/users.model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const TIME_TO_EXPIRE = 86400;
 
 class UsersLogics extends Logic {
 
@@ -33,10 +34,7 @@ class UsersLogics extends Logic {
         if (!isMatch) {
             throw new Error('Invalid email or password');
         }
-        const token = jwt.sign({ id: user._id, username: user.username, role: user.role }, process.env.SECRET_JWT, { expiresIn: 86400 });
-
-        // actualiza el token del usuario
-        this.update(user._id, { jwt_access: token })
+        const token = jwt.sign({ id: user._id, username: user.username, role: user.role }, process.env.SECRET_JWT, { expiresIn: 86000 });
 
         return token;
     }

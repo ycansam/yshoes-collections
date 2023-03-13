@@ -26,3 +26,11 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3001/v1/yshoes/users/63f1280f1376cc5bcd198644
+
+###
+POST http://localhost:3001/v1/ensure-process/ensure
+Content-Type: application/json
+
+{
+    "ensure": true
+}

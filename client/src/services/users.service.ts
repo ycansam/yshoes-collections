@@ -1,6 +1,5 @@
 
-import router from "@/utils/service-router";
-import headers from "@/utils/headers-router";
+import router from "@/services/service-router";
 
 class UsersService {
 

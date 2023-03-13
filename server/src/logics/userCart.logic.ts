@@ -1,25 +1,49 @@
 
 import ICartProduct from "../interfaces/cartProduct.interface";
-import IUser from "../interfaces/users.interface";
+import User from "../interfaces/users.interface";
 const UsersModel = require('../models/users.model')
 const ProductsModel = require('../models/products.model')
+abstract class Response {
+    constructor(protected message: string, protected status: boolean) {
+
+    }
+
+    public getMessage(): string {
+        return this.message;
+    }
+
+    public getStatus(): boolean {
+        return this.status;
+    }
+}
+
+class NotProductFoundResponse extends Response {
+    constructor() {
+        super("Not Product Found", false);
+    }
+}
+class NotUserFoundResponse extends Response {
+    constructor() {
+        super("Not User Found", false);
+    }
+}
+
 
 class UserCartLogic {
 
-    private checkProductExist = async (id_product: string): Promise<void> => {
+    private checkProductExist = async (id_product: string): Promise<boolean> => {
         const product = await ProductsModel.findById(id_product);
-        if (!product)
-            throw new Error("Product does not exist");
+        return product !== null;
     }
 
-    private findUserDoc = async (id_user: string): Promise<IUser> => {
-        const userDoc: IUser = await UsersModel.findById(id_user);
+    private findUserDoc = async (id_user: string): Promise<User> => {
+        const userDoc: User = await UsersModel.findById(id_user);
         if (userDoc)
             return userDoc
-        throw new Error("User does not exist")
+        return null
     }
 
-    private updateOrAddProductOnCart = async (userDoc: IUser, { id_product, quantity, color, size }: ICartProduct): Promise<IUser> => {
+    private updateOrAddProductOnCart = async (userDoc: User, { id_product, quantity, color, size }: ICartProduct): Promise<User> => {
         let product: ICartProduct = userDoc.cart.find((product: ICartProduct) => {
             return product.id_product == id_product && product.color == color && product.size == size;
         })
@@ -43,23 +67,22 @@ class UserCartLogic {
     }
 
 
-    public addProduct = async (id_user: string, { id_product, quantity, color, size }: ICartProduct): Promise<boolean> => {
+    public addProduct = async (id_user: string, { id_product, quantity, color, size }: ICartProduct): Promise<Response> => {
         return new Promise(async (resolve, reject) => {
-            try {
-                // Comprueba primero que el producto exista
-                await this.checkProductExist(id_product);
 
-                // busca el user
-                const userDoc: IUser = await this.findUserDoc(id_user);
+            const isProductFound = await this.checkProductExist(id_product);
+            if (!isProductFound) resolve(new NotProductFoundResponse());
 
-                // busca el producto en el carrito
-                const userDocUpdated: IUser = await this.updateOrAddProductOnCart(userDoc, { id_product, quantity, color, size });
-                userDocUpdated.save();
+            const userDoc: User = await this.findUserDoc(id_user);
+            if (!userDoc) resolve(new NotUserFoundResponse());
 
-                userDocUpdated ? resolve(true) : reject(new Error("Product wasn't added"));
-            } catch (err) {
-                reject(err)
-            }
+
+
+            const userDocUpdated: User = await this.updateOrAddProductOnCart(userDoc, { id_product, quantity, color, size });
+            userDocUpdated.save();
+
+            userDocUpdated ? resolve(new NotProductFoundResponse()) : reject("Product wasn't added");
+            
         })
     }
 
@@ -69,11 +92,11 @@ class UserCartLogic {
             try {
 
                 // busca el user
-                let userDoc: IUser = await this.findUserDoc(id_user);
+                let userDoc: User = await this.findUserDoc(id_user);
 
                 // busca el producto en el carrito
                 const cart = this.removeProductFromCart(userDoc.cart, id_in_cart);
-                
+
                 userDoc.cart = cart;
                 const userUpdated = userDoc.save();
 

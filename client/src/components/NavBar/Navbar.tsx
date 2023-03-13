@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./NavBar.module.css";
 import NavBarItems from "./NavBar.items";
 import Link from 'next/link';
@@ -19,7 +19,6 @@ const ItemNav: React.FC<ItemNavbar> = ({ name, path }) => {
 
 // Componente principal nav
 const NavBar: React.FC = () => {
-
     return (
         <nav className={styles.mainContainer}>
             <div>

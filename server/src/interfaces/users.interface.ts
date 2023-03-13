@@ -1,6 +1,6 @@
 
 
-interface IUser {
+interface User {
     _id?: string | any;
     username: String;
     name: String,
@@ -13,4 +13,4 @@ interface IUser {
     save: () => {}
 }
 
-export default IUser;
+export default User;

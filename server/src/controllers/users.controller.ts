@@ -16,7 +16,6 @@ class UsersController extends Controller {
     public login = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 
         try {
-
             const { username, password } = req.body;
 
             const token = usersLogic.login({ username, password });

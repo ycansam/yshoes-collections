@@ -1,7 +1,7 @@
 'use client';
 import styles from './page.module.css'
 import Authorization from '@/utils/Authorization.component'
-import ROLES from '@/utils/roles.variables';
+import ROLES from '@/utils/constants/roles.constants';
 
 
 function Admin() {

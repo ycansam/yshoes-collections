@@ -1,13 +1,15 @@
 require('dotenv').config();
-import express, { Application, Request, Response, json, urlencoded } from 'express';
+import express, { Application, urlencoded } from 'express';
+import ensure from 'ensure-process'
 import Endpoints from './Endpoints';
 import UsersRouter from './routes/users.routes';
 import productsRoutes from './routes/products.routes';
 import userCartRoutes from './routes/userCart.routes';
 import Database from './database';
 import { errorHandler } from './middlewares/errorhandler.middleware';
-
 const cors = require('cors');
+
+
 class Server {
     private app: Application;
     private readonly port: number = 3001;
@@ -26,8 +28,10 @@ class Server {
 
     private configure(): void {
         this.app.use(express.json());
+        this.app.use(ensure);
         this.app.use(cors(this.corsOptions));
         this.app.use(urlencoded({ extended: false }))
+
     }
 
     private connectDatabase(): void {

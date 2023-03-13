@@ -12,7 +12,9 @@ class UserCartController {
             const productAdded = userCartLogic.addProduct(id_user, { id_product, size, color, quantity });
 
             productAdded.then((item: any) => {
-                return res.status(200).json({ content: item, message: "product added" });
+                if (item)
+                    return res.status(200).json({ content: item, message: "product added" });
+                return res.status(404).json({ message: "product not found" });
             }).catch((err: Error) => {
                 console.log(err.message);
                 next(err);

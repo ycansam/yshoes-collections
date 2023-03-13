@@ -40,7 +40,6 @@ const UserModel = new Schema<IUser>({
   role: { type: String, enum: ['user', 'admin'], required: true, default: 'user' },
   name: { type: String },
   surnames: { type: String },
-  jwt_access: { type: String },
   cart: {
     type: [{
       id_product: {

@@ -1,10 +1,9 @@
 
-import LOCAL_STORAGE_VARIABLES from "./localstoragevariables";
-
+import usersLocalStorageService from "@/services/tokenStorage.service";
 
 const headers = () => {
 
-    const token = localStorage.getItem(LOCAL_STORAGE_VARIABLES.TOKEN);
+    const token = usersLocalStorageService.getToken();
 
     return {
         headers: {
