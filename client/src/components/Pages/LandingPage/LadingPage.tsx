@@ -1,9 +1,8 @@
 import React from "react";
 import Banner from "./Banner/Banner";
-import SectionContent from "../SectionContent/SectionContent";
+import SectionContent from "@/components/SectionContent/SectionContent";
 import LandingPageContents from "./LandingPage.contents";
-import FeaturedProducts from "../FeaturedProducts/FeaturedProducts";
-
+import FeaturedProducts from "@/components/FeaturedProducts/FeaturedProducts";
 const LandingPage: React.FC = () => {
 
     return (

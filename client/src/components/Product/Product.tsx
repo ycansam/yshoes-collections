@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
-import IProductView from "@/models/product.interface";
+import Product from "@/models/product.interface";
 import styles from './Product.module.css'
 
-const Product: React.FC<IProductView> = ({ image, name, price, currency }) => {
-
+const Product: React.FC<Product> = ({ image, name, price, currency }) => {
     return (
         <div className={styles.mainContainer}>
             <img src={image} alt="product image"></img>

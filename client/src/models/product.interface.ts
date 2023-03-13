@@ -5,4 +5,5 @@ export default interface Product {
     colors: any;
     price: number;
     currency: string;
+    image: string;
 }

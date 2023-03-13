@@ -5,7 +5,9 @@ const PATHS = {
     },
     USER: {
         ACCOUNT: '/account',
-        CART: '/cart'
+        CART: '/cart',
+        CHECKOUT: '/cart/checkout',
+        PAYMENT: '/cart/checkout/payment'
     },
     ERROR: '/error',
     UNAUTHORIZED: "/unauthorized"
