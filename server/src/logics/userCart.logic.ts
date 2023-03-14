@@ -102,17 +102,24 @@ class UserCartLogic {
         return null
     }
 
-    private updateOrAddProductOnCart = async (userDoc: User, { id_product, quantity, color, size }: ICartProduct): Promise<User> => {
-        let product = userDoc.cart.find((product: CartProduct) => {
+    private updateOrAddProductOnCart = (userDoc: User, { id_product, quantity, color, size }: ICartProduct): User => {
+        let productFoundOncart = this.findEqualProductOnUserCart(userDoc, { id_product, quantity, color, size })
+        if (productFoundOncart) this.addOneProductQuantity(productFoundOncart);
+        else this.pushNewProductToCart(userDoc, { id_product, quantity, color, size })
+        return userDoc;
+    }
+
+    private findEqualProductOnUserCart = (userDoc: User, { id_product, quantity, color, size }) => {
+        return userDoc.cart.find((product: CartProduct) => {
             return product.id_product._id == id_product && product.color == color && product.size == size;
         })
-        // Si el producto con caracteristicas iguales esta en la lista añade mas cantidad, si no lo crea
-        if (product) {
-            product.quantity = product.quantity + 1;
-        } else {
-            userDoc.cart.push({ id_product, quantity, color, size })
-        }
-        return userDoc;
+    }
+
+    private addOneProductQuantity = (product: CartProduct) => {
+        product.quantity = product.quantity + 1;
+    }
+    private pushNewProductToCart = (userDoc: User, { id_product, quantity, color, size }) => {
+        userDoc.cart.push({ id_product, quantity, color, size })
     }
 
     private removeProductFromCart = (cart: Array<ICartProduct>, id_in_cart: string): Array<ICartProduct> => {

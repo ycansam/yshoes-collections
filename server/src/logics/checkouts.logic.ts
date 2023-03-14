@@ -39,12 +39,12 @@ class CheckoutsLogic {
     }
 
 
-    private completeCheckout = async (checkout: Checkout, completed: boolean) => {
+    private completeCheckout = async (checkout: Checkout, completed: boolean): Promise<boolean> => {
         return await this.addToDatabase({ ...checkout, completed });
 
     }
 
-    private addToDatabase = async (checkout: Checkout) => {
+    private addToDatabase = async (checkout: Checkout): Promise<boolean> => {
         return new Promise(async (resolve, reject) => {
             try {
                 await CheckoutsModel.create(checkout);
