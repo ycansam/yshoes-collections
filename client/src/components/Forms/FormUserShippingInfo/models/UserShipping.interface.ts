@@ -3,8 +3,7 @@ export default interface UserShipping {
     name: string;
     surnames: string;
     address: string;
-    houseAddress: string;
-    postalCode: number;
+    postal_code: number;
     city: string;
     state: string;
     phone: string;

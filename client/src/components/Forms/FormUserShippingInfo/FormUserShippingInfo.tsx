@@ -15,8 +15,7 @@ const FormCheckout: React.FC = () => {
         name: '',
         surnames: '',
         address: '',
-        houseAddress: '',
-        postalCode: 0,
+        postal_code: 0,
         city: '',
         state: '',
         phone: '',
@@ -40,9 +39,9 @@ const FormCheckout: React.FC = () => {
                 <input name='name' placeholder='Nombre' value={state.name} onChange={handleChange}></input>
                 <input name='surnames' placeholder='Apellidos' value={state.surnames} onChange={handleChange}></input>
             </div>
-            <input name='houseAddress' placeholder='Casa, Apartamento, etc..' value={state.houseAddress} onChange={handleChange}></input>
+            <input name='address' placeholder='Casa, Apartamento, etc..' value={state.address} onChange={handleChange}></input>
             <div>
-                <input name='postalCode' placeholder='Codigo Portal' value={state.postalCode} onChange={handleChange}></input>
+                <input name='postal_code' placeholder='Codigo Portal' value={state.postal_code} onChange={handleChange}></input>
                 <input name='city' placeholder='Ciudad' value={state.city} onChange={handleChange}></input>
                 <input name='state' placeholder='Provincia / Estado' value={state.state} onChange={handleChange}></input>
             </div>
