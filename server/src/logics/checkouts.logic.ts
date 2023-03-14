@@ -3,7 +3,7 @@ const Stripe = require('stripe')
 const stripe = Stripe(process.env.STRIPE_SECRET);
 
 class CheckoutsLogic {
-    public addCheckout = async ({ id, amount, currency }: any): Promise<any> => {
+    public addCheckout = async ({ id, cart, amount, currency, userInfo }: any): Promise<any> => {
 
         return new Promise(async (resolve, reject) => {
             try {
@@ -11,7 +11,9 @@ class CheckoutsLogic {
                     amount,
                     currency,
                     payment_method: id,
-                    confirm: true
+                    confirm: true,
+                    cart,
+                    userInfo
                 })
                 console.log(payment)
                 resolve({ payment, message: 'Payment Success' })

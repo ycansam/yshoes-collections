@@ -3,8 +3,8 @@ import checkoutsLogic from "../logics/checkouts.logic";
 
 class CheckoutsController {
     public addCheckout = (req: Request, res: Response, next: NextFunction) => {
-        const { id, amount, currency } = req.body;
-        const response = checkoutsLogic.addCheckout({ id, amount, currency });
+        const  { id, cart, amount, currency, userInfo } = req.body;
+        const response = checkoutsLogic.addCheckout( { id, cart, amount, currency, userInfo });
         response.then(() => {
             return res.status(200).json({ content: "", message: "paid confirmed" });
         }).catch((err: Error) => {

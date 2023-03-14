@@ -1,7 +1,7 @@
 
 import ICartProduct from "../interfaces/cartProduct.interface";
 import User from "../interfaces/users.interface";
-import CartProduct from "../models/cart-product.interface";
+import CartProduct from "../models/interfaces/cart-product.interface";
 const UsersModel = require('../models/users.model')
 const ProductsModel = require('../models/products.model')
 abstract class Response {
