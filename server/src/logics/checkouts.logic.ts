@@ -17,16 +17,16 @@ class CheckoutsLogic {
         return new Promise(async (resolve, reject) => {
             try {
 
+                await this.completeCheckout(checkout, true)
+
+                await productsLogic.substractStocksFromCartCheckout(checkout.cart);
+
                 const payment = await stripe.paymentIntents.create({
                     amount: parseInt(amount),
                     currency,
                     payment_method: id,
                     confirm: true,
                 })
-
-                await this.completeCheckout(checkout, true)
-
-                await productsLogic.substractStocksFromCartCheckout(checkout.cart);
 
                 resolve({ payment, message: 'Payment Success' })
             } catch (err) {

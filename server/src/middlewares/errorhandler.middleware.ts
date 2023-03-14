@@ -6,9 +6,8 @@ export const errorHandler = (
     next: NextFunction
 ) => {
     console.error(err.stack);
-    let code = 500;
+    let code = 400;
     if (err.message.toLocaleLowerCase().includes('not found')) code = 404;
-    if (err.message.toLocaleLowerCase().includes('not updated')) code = 400;
 
     return res.status(code).json({ name: err.name, message: err.message });
 };

@@ -29,7 +29,8 @@ class ProductsLogic extends Logic {
                     const sizeIndex = this.findIndexOfProductSize(product, productCart, colorIndex);
                     if (!this.existsIndex(sizeIndex)) reject(new Error('Size was not found'))
 
-                    product.colors[colorIndex].sizes[sizeIndex].units -= productCart.quantity;
+                    const units = product.colors[colorIndex].sizes[sizeIndex].units -= productCart.quantity;
+                    if(units <= 0) reject(new Error('There is no stock available for this product'))
                     const updated = await this.model.findByIdAndUpdate(productCart.id_product._id, product);
                     if (!updated) reject(new Error('Product was not updated'))
                 }
