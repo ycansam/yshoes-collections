@@ -8,7 +8,7 @@ class CheckoutsController {
         response.then(() => {
             return res.status(200).json({ content: "", message: "paid confirmed" });
         }).catch((err: Error) => {
-            console.log(err.message);
+            console.log(err);
             next(err);
         })
     }

@@ -23,6 +23,12 @@ class NotProductFoundResponse extends Response {
         super("Not Product Found", false);
     }
 }
+
+class ProductAddedToCartResponse extends Response {
+    constructor() {
+        super("Product Added to Cart", true);
+    }
+}
 class NotUserFoundResponse extends Response {
     constructor() {
         super("Not User Found", false);
@@ -48,15 +54,15 @@ class UserCartLogic {
         return new Promise(async (resolve, reject) => {
 
             const isProductFound = await this.checkProductExist(id_product);
-            if (!isProductFound) resolve(new NotProductFoundResponse());
+            if (!isProductFound) reject(new NotProductFoundResponse());
 
             const userDoc: User = await this.findUserDoc(id_user);
-            if (!userDoc) resolve(new NotUserFoundResponse());
+            if (!userDoc) reject(new NotUserFoundResponse());
 
             const userDocUpdated: User = await this.updateOrAddProductOnCart(userDoc, { id_product, quantity, color, size });
             userDocUpdated.save();
-
-            userDocUpdated ? resolve(new NotProductFoundResponse()) : reject("Product wasn't added");
+            if (userDocUpdated)
+                userDocUpdated ? resolve(new ProductAddedToCartResponse()) : reject("Product wasn't added");
 
         })
     }
@@ -97,8 +103,8 @@ class UserCartLogic {
     }
 
     private updateOrAddProductOnCart = async (userDoc: User, { id_product, quantity, color, size }: ICartProduct): Promise<User> => {
-        let product: ICartProduct = userDoc.cart.find((product: ICartProduct) => {
-            return product.id_product == id_product && product.color == color && product.size == size;
+        let product = userDoc.cart.find((product: CartProduct) => {
+            return product.id_product._id == id_product && product.color == color && product.size == size;
         })
         // Si el producto con caracteristicas iguales esta en la lista añade mas cantidad, si no lo crea
         if (product) {

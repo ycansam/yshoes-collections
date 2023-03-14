@@ -7,8 +7,8 @@ Content-Type: application/json
 
 {
     "id_product": "63f21521bac6480a4aa3bfd3",
-    "size": "extralarge",
-    "color": "blue"
+    "size": "45",
+    "color": "rabo"
 }
 
 ###
