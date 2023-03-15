@@ -5,7 +5,7 @@ import ICartProduct from "../interfaces/cartProduct.interface";
 class UserCartController {
 
 
-    public getByUser = async (req: Request, res: Response, next: NextFunction) => {
+    public getByUser = (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id_user } = req.params;
 
@@ -20,8 +20,27 @@ class UserCartController {
         } catch (err) {
             next(err);
         }
-
     }
+
+
+    public clearByUser = (req: Request, res: Response, next: NextFunction) => {
+
+        try {
+            const { id_user } = req.params;
+
+            const response = userCartLogic.clearByUser(id_user);
+
+            response.then((cart: any) => {
+                return res.status(200).json({ content: cart, message: "cart cleared" });
+            }).catch((err: Error) => {
+                console.log(err.message);
+                next(err);
+            })
+        } catch (err) {
+            next(err);
+        }
+    }
+
 
     public addProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -60,8 +79,10 @@ class UserCartController {
         } catch (err) {
             next(err);
         }
-
     }
+
+
+
 
 }
 

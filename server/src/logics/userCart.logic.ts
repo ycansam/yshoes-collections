@@ -2,8 +2,9 @@
 import ICartProduct from "../interfaces/cartProduct.interface";
 import User from "../interfaces/users.interface";
 import CartProduct from "../models/interfaces/cart-product.interface";
-const UsersModel = require('../models/users.model')
-const ProductsModel = require('../models/products.model')
+import UsersLogic from "./users.logic";
+import UsersModel from "../models/users.model";
+import productsLogic from "./products.logic";
 abstract class Response {
     constructor(protected message: string, protected status: boolean) {
 
@@ -41,7 +42,7 @@ class UserCartLogic {
     public getByUser = (id_user: string): Promise<CartProduct[]> => {
 
         return new Promise(async (resolve, reject) => {
-            const userDoc: User = await this.findUserDoc(id_user);
+            const userDoc: User = await UsersLogic.getById(id_user);
             if (!userDoc) reject(new NotUserFoundResponse());
 
 
@@ -49,14 +50,22 @@ class UserCartLogic {
             resolve(userDoc.cart);
         })
     }
+    public clearByUser = (id_user: string): Promise<boolean> => {
+        return new Promise(async (resolve, reject) => {
+            const updated = await UsersModel.updateOne({ _id: id_user }, { $set: { cart: [] } });
+            if (!updated) reject(new NotUserFoundResponse());
+            resolve(true);
+        })
+    }
+
 
     public addProduct = async (id_user: string, { id_product, quantity, color, size }: ICartProduct): Promise<Response> => {
         return new Promise(async (resolve, reject) => {
 
-            const isProductFound = await this.checkProductExist(id_product);
+            const isProductFound = await productsLogic.checkProductExist(id_product);
             if (!isProductFound) reject(new NotProductFoundResponse());
 
-            const userDoc: User = await this.findUserDoc(id_user);
+            const userDoc: User = await UsersLogic.getById(id_user);
             if (!userDoc) reject(new NotUserFoundResponse());
 
             const userDocUpdated: User = await this.updateOrAddProductOnCart(userDoc, { id_product, quantity, color, size });
@@ -73,7 +82,7 @@ class UserCartLogic {
             try {
 
                 // busca el user
-                let userDoc: User = await this.findUserDoc(id_user);
+                let userDoc: User = await UsersLogic.getById(id_user);
 
                 // busca el producto en el carrito
                 const cart = this.removeProductFromCart(userDoc.cart, id_in_cart);
@@ -88,19 +97,8 @@ class UserCartLogic {
         })
     }
 
+   
 
-
-    private checkProductExist = async (id_product: string): Promise<boolean> => {
-        const product = await ProductsModel.findById(id_product);
-        return product !== null;
-    }
-
-    private findUserDoc = async (id_user: string): Promise<User> => {
-        const userDoc: User = await UsersModel.findById(id_user).populate('cart.id_product', 'name price image currency');
-        if (userDoc)
-            return userDoc
-        return null
-    }
 
     private updateOrAddProductOnCart = (userDoc: User, { id_product, quantity, color, size }: ICartProduct): User => {
         let productFoundOncart = this.findEqualProductOnUserCart(userDoc, { id_product, quantity, color, size })

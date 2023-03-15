@@ -4,6 +4,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET);
 import CheckoutsModel from "../models/checkouts.model";
 import Checkout from "../models/interfaces/checkout.interface";
 import productsLogic from "./products.logic";
+import userCartLogic from "./userCart.logic";
 class CheckoutsLogic {
     public addCheckout = async ({ id, id_user, cart, amount, currency, userInfo, card }): Promise<any> => {
         const checkout: Checkout = {
@@ -16,10 +17,11 @@ class CheckoutsLogic {
         }
         return new Promise(async (resolve, reject) => {
             try {
+                const substracted = await productsLogic.substractStocksFromCartCheckout(checkout.cart);
 
-                await this.completeCheckout(checkout, true)
+                const saved = await this.saveCheckout(checkout, true)
 
-                await productsLogic.substractStocksFromCartCheckout(checkout.cart);
+                const cleared = await userCartLogic.clearByUser(id_user);
 
                 const payment = await stripe.paymentIntents.create({
                     amount: parseInt(amount),
@@ -30,7 +32,7 @@ class CheckoutsLogic {
 
                 resolve({ payment, message: 'Payment Success' })
             } catch (err) {
-                const added = this.completeCheckout(checkout, false)
+                const added = this.saveCheckout(checkout, false)
                 if (!added) reject(added)
                 if (err?.raw?.message) reject(err.raw.message);
                 reject(err);
@@ -39,9 +41,8 @@ class CheckoutsLogic {
     }
 
 
-    private completeCheckout = async (checkout: Checkout, completed: boolean): Promise<boolean> => {
+    private saveCheckout = async (checkout: Checkout, completed: boolean): Promise<boolean> => {
         return await this.addToDatabase({ ...checkout, completed });
-
     }
 
     private addToDatabase = async (checkout: Checkout): Promise<boolean> => {

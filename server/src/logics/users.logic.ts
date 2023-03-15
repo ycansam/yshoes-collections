@@ -1,7 +1,7 @@
 import Logic from "./logic.logic";
 import CUser from "../classes/users.class";
-import IUser from "../interfaces/users.interface";
-const usersModel = require('../models/users.model')
+import User from "../interfaces/users.interface";
+import UsersModel from "../models/users.model";
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -9,7 +9,12 @@ const TIME_TO_EXPIRE = 86400;
 
 class UsersLogics extends Logic {
 
-    public getById = this.getByIdAny
+    public getById = async (id_user: string): Promise<User> => {
+        const userDoc: User = await UsersModel.findById(id_user).populate('cart.id_product', 'name price image currency');
+        if (userDoc)
+            return userDoc
+        return null
+    }
 
     public create = this.createAny
 
@@ -17,10 +22,14 @@ class UsersLogics extends Logic {
 
     public delete = this.deleteAnyById
 
+    public login = async ({ username, password }) => {
+        const token = this.Authenticate(username, password);
+        return token;
+    }
 
     private Authenticate = async (username: string, password: string) => {
         // find the user by email
-        const user: IUser = await usersModel.findOne({ username });
+        const user: User = await UsersModel.findOne({ username });
 
         // if no user is found, return an error
         if (!user) {
@@ -35,19 +44,15 @@ class UsersLogics extends Logic {
             throw new Error('Invalid email or password');
         }
         const token = jwt.sign({ id: user._id, username: user.username, role: user.role }, process.env.SECRET_JWT, { expiresIn: 86000 });
-
+        
         return token;
     }
 
 
-    public login = async ({ username, password }) => {
 
-        // if the passwords match, create a JWT and return it to the client
-        const token = this.Authenticate(username, password);
 
-        return token;
-    }
+
 }
 
-const usersLogic: UsersLogics = new UsersLogics(usersModel, CUser, "user");
+const usersLogic: UsersLogics = new UsersLogics(UsersModel, CUser, "user");
 export default usersLogic;

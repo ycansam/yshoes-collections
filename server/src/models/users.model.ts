@@ -81,4 +81,4 @@ UserModel.pre('save', function (next) {
 });
 
 UserModel.plugin(idValidator);
-module.exports = mongoose.model('User', UserModel);
+export default mongoose.model('User', UserModel);
